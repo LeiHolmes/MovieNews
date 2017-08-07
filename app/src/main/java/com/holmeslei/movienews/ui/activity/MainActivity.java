@@ -5,6 +5,11 @@ import android.os.Bundle;
 
 import com.holmeslei.movienews.R;
 
+/**
+ * Description:   入口Activity
+ * author         xulei
+ * Date           2017/8/7 16:20
+ */
 public class MainActivity extends AppCompatActivity {
 
     @Override

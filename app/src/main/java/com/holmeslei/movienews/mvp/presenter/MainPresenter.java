@@ -1,6 +1,8 @@
 package com.holmeslei.movienews.mvp.presenter;
 
 import com.holmeslei.movienews.mvp.model.MainModel;
+import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
+import com.holmeslei.movienews.mvp.model.listener.GetShowingMoviesListener;
 import com.holmeslei.movienews.mvp.view.MainView;
 
 /**
@@ -19,6 +21,23 @@ public class MainPresenter extends BasePresenter<MainView> {
 
     @Override
     public void onCreate() {
+    }
+
+    /**
+     * v,m交互，请求获取正在上映电影
+     */
+    public void getShowingMovies(String city) {
+        mainModel.getShowingMoviesRequest(city, new GetShowingMoviesListener() {
+            @Override
+            public void onSuccess(ShowingMovies showingMovies) {
+                view.getShowingMoviesData(showingMovies);
+            }
+
+            @Override
+            public void onError(String errorMessage) {
+                view.getShowingMoviesError(errorMessage);
+            }
+        });
     }
 
 }

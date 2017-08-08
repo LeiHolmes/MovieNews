@@ -1,5 +1,7 @@
 package com.holmeslei.movienews.mvp.view;
 
+import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
+
 /**
  * Description:
  * author         xulei
@@ -7,5 +9,7 @@ package com.holmeslei.movienews.mvp.view;
  */
 
 public interface MainView extends BaseView {
-    void showToast(String toastMessage);
+    void getShowingMoviesData(ShowingMovies showingMovies);
+
+    void getShowingMoviesError(String errorMessage);
 }

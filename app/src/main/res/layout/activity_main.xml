@@ -7,9 +7,14 @@
     tools:context="com.holmeslei.movienews.ui.activity.MainActivity"
     tools:openDrawer="start">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_Main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/rv_Main"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent" />-->
 
+    <TextView
+        android:id="@+id/tv_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="测试数据" />
 </RelativeLayout>

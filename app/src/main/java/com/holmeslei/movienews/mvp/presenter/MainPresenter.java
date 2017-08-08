@@ -1,7 +1,5 @@
 package com.holmeslei.movienews.mvp.presenter;
 
-import android.os.Bundle;
-
 import com.holmeslei.movienews.mvp.model.MainModel;
 import com.holmeslei.movienews.mvp.view.MainView;
 
@@ -16,6 +14,7 @@ public class MainPresenter extends BasePresenter<MainView> {
 
     public MainPresenter(MainView mainView) {
         super(mainView);
+        mainModel = new MainModel();
     }
 
     @Override

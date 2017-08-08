@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.holmeslei.movienews.mvp.presenter.BasePresenter;
+import com.holmeslei.movienews.mvp.view.BaseView;
+
 /**
  * Description:
  * author         xulei
@@ -34,6 +37,13 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
+    }
+
+    /**
+     * fragment进行回退
+     */
+    public void onBack() {
+        getFragmentManager().popBackStack();
     }
 
     /**
@@ -86,8 +96,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
 
     /**
      * 初始化Fragment的视图
-     *
-     * @return
      */
     public abstract View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);
 

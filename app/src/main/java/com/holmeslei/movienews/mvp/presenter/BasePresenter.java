@@ -1,6 +1,6 @@
-package com.holmeslei.movienews.ui.base;
+package com.holmeslei.movienews.mvp.presenter;
 
-import android.os.Bundle;
+import com.holmeslei.movienews.mvp.view.BaseView;
 
 /**
  * Description:   MVP中的基本view接口类
@@ -10,6 +10,10 @@ import android.os.Bundle;
 
 public abstract class BasePresenter<T extends BaseView> {
     protected T view;
+
+    public BasePresenter(T view) {
+        this.view = view;
+    }
 
     /**
      * 绑定View
@@ -37,8 +41,4 @@ public abstract class BasePresenter<T extends BaseView> {
         view = null;
     }
 
-    /**
-     * 容易被回收掉时保存数据
-     */
-    public abstract void onSaveInstanceState(Bundle outState);
 }

@@ -1,10 +1,12 @@
 package com.holmeslei.movienews.ui.base;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.holmeslei.movienews.R;
+import com.holmeslei.movienews.mvp.presenter.BasePresenter;
+import com.holmeslei.movienews.mvp.view.BaseView;
+
+import butterknife.ButterKnife;
 
 /**
  * Description:   入口Activity
@@ -18,6 +20,7 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        ButterKnife.bind(this);
         //创建Presenter
         presenter = initPresenter();
         //绑定presenter
@@ -41,15 +44,9 @@ public abstract class BaseActivity<T extends BasePresenter> extends AppCompatAct
     protected abstract T initPresenter();
 
     /**
-     * 子类必须实现,并初始化Activity,比如setContentView()
+     * 子类必须实现,并初始化Activity
      */
     protected abstract void onCreateActivity(Bundle savedInstanceState);
-
-    @Override
-    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-        presenter.onSaveInstanceState(outState);
-    }
 
     @Override
     protected void onDestroy() {

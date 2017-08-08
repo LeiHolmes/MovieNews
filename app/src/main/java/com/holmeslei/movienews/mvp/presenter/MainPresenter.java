@@ -5,6 +5,8 @@ import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
 import com.holmeslei.movienews.mvp.model.listener.GetShowingMoviesListener;
 import com.holmeslei.movienews.mvp.view.MainView;
 
+import io.reactivex.disposables.Disposable;
+
 /**
  * Description:
  * author         xulei
@@ -26,8 +28,8 @@ public class MainPresenter extends BasePresenter<MainView> {
     /**
      * v,m交互，请求获取正在上映电影
      */
-    public void getShowingMovies(String city) {
-        mainModel.getShowingMoviesRequest(city, new GetShowingMoviesListener() {
+    public void requestShowingMovies(String city) {
+        addDisposable(mainModel.requestShowingMovies(city, new GetShowingMoviesListener() {
             @Override
             public void onSuccess(ShowingMovies showingMovies) {
                 view.getShowingMoviesData(showingMovies);
@@ -37,7 +39,7 @@ public class MainPresenter extends BasePresenter<MainView> {
             public void onError(String errorMessage) {
                 view.getShowingMoviesError(errorMessage);
             }
-        });
+        }));
     }
 
 }

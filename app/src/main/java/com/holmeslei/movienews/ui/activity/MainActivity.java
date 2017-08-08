@@ -21,8 +21,8 @@ import butterknife.BindView;
  * Date           2017/8/7 16:20
  */
 public class MainActivity extends BaseActivity implements MainView {
-//    @BindView(R.id.rv_Main)
-//    RecyclerView rvMain;
+    @BindView(R.id.rv_Main)
+    RecyclerView rvMain;
     @BindView(R.id.tv_main)
     TextView tvMain;
     private MainPresenter mainPresenter;
@@ -40,7 +40,7 @@ public class MainActivity extends BaseActivity implements MainView {
 
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
-        mainPresenter.getShowingMovies("北京");
+        mainPresenter.requestShowingMovies("北京");
     }
 
     @Override
@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements MainView {
      */
     @Override
     public void getShowingMoviesData(ShowingMovies showingMovies) {
-        Log.e("getShowingMoviesData", showingMovies.toString());
+        Log.i("getShowingMoviesData", showingMovies.toString());
         tvMain.setText(showingMovies.toString());
     }
 
@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity implements MainView {
      */
     @Override
     public void getShowingMoviesError(String errorMessage) {
-        Log.e("getShowingMoviesError", errorMessage);
+        Log.i("getShowingMoviesError", errorMessage);
         tvMain.setText(errorMessage);
     }
 }

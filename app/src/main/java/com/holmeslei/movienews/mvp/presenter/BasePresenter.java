@@ -2,6 +2,9 @@ package com.holmeslei.movienews.mvp.presenter;
 
 import com.holmeslei.movienews.mvp.view.BaseView;
 
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
+
 /**
  * Description:   MVP中的基本view接口类
  * author         xulei
@@ -10,6 +13,7 @@ import com.holmeslei.movienews.mvp.view.BaseView;
 
 public abstract class BasePresenter<T extends BaseView> {
     protected T view;
+    protected CompositeDisposable compositeDisposable; //用于取消订阅
 
     public BasePresenter(T view) {
         this.view = view;
@@ -20,6 +24,7 @@ public abstract class BasePresenter<T extends BaseView> {
      */
     public void onAttach(T view) {
         this.view = view;
+        compositeDisposable = new CompositeDisposable();
     }
 
     /**
@@ -32,6 +37,8 @@ public abstract class BasePresenter<T extends BaseView> {
      * 在这里结束异步操作
      */
     public void onDestroy() {
+        if (compositeDisposable != null)
+            compositeDisposable.clear();
     }
 
     /**
@@ -41,4 +48,9 @@ public abstract class BasePresenter<T extends BaseView> {
         view = null;
     }
 
+    protected void addDisposable(Disposable disposable) {
+        if (disposable != null && compositeDisposable != null) {
+            compositeDisposable.add(disposable);
+        }
+    }
 }

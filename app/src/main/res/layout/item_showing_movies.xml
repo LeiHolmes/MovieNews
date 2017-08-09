@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/iv_header_sm"
+            android:layout_width="50dp"
+            android:layout_height="75dp"
+            android:layout_marginRight="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_header_sm"
+            android:layout_alignTop="@+id/iv_header_sm"
+            android:layout_toRightOf="@+id/iv_header_sm"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_movie_name_sm"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="电影名称：战狼2"
+                android:textColor="#000"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/tv_movie_date_sm"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:text="上映时间：2017"
+                android:textColor="#6d6d6d"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_movie_star_sm"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="bottom"
+                android:text="豆瓣评分：7.5"
+                android:textColor="#f3cf5e"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

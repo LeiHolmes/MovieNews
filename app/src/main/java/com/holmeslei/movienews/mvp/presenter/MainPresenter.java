@@ -5,8 +5,6 @@ import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
 import com.holmeslei.movienews.mvp.model.listener.GetShowingMoviesListener;
 import com.holmeslei.movienews.mvp.view.MainView;
 
-import io.reactivex.disposables.Disposable;
-
 /**
  * Description:
  * author         xulei
@@ -41,5 +39,4 @@ public class MainPresenter extends BasePresenter<MainView> {
             }
         }));
     }
-
 }

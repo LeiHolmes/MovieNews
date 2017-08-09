@@ -48,12 +48,18 @@ public class ShowingMoviesAdapter extends RecyclerView.Adapter<ShowingMoviesAdap
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Glide.with(context)
 //                .applyDefaultRequestOptions(new RequestOptions().placeholder())) //设置占位，尺寸，填充方式等
-                .load(data.get(position).getImages().getMedium())
+                .load(data.get(position).getImages().getLarge())
                 .transition(new DrawableTransitionOptions().crossFade(1000)) //淡入淡出1s
                 .into(holder.ivHeater);
         holder.tvMovieName.setText(data.get(position).getTitle());
         holder.tvMovieDate.setText("上映时间：" + data.get(position).getYear());
         holder.tvMovieStar.setText("豆瓣评分：" + data.get(position).getRating().getAverage());
+        StringBuilder actors = new StringBuilder();
+        List<ShowingMovies.SubjectsEntity.CastsEntity> castsEntities = data.get(position).getCasts();
+        for (ShowingMovies.SubjectsEntity.CastsEntity castsEntity : castsEntities) {
+            actors.append(castsEntity.getName()).append(" ");
+        }
+        holder.tvMovieActors.setText("主演：" + actors);
     }
 
     @Override
@@ -63,13 +69,15 @@ public class ShowingMoviesAdapter extends RecyclerView.Adapter<ShowingMoviesAdap
 
     class MyViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.iv_header_sm)
-        ImageView ivHeater;
+        ImageView ivHeater; //电影海报
         @BindView(R.id.tv_movie_name_sm)
-        TextView tvMovieName;
+        TextView tvMovieName; //电影名称
+        @BindView(R.id.tv_movie_actors_sm)
+        TextView tvMovieActors; //主演
         @BindView(R.id.tv_movie_date_sm)
-        TextView tvMovieDate;
+        TextView tvMovieDate; //上映时间
         @BindView(R.id.tv_movie_star_sm)
-        TextView tvMovieStar;
+        TextView tvMovieStar; //豆瓣评分
 
         MyViewHolder(View itemView) {
             super(itemView);

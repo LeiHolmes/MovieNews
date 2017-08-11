@@ -21,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Description:
+ * Description:   通用的电影信息列表Fragment
  * author         xulei
  * Date           2017/8/11
  */
@@ -65,22 +65,7 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
         param = getArguments().getString(PARAM);
         switch (function) {
             case "影讯":
-                switch (param) {
-                    case "in_theaters": //正在热映
-                        //请求北京正在热映电影的数据
-                        generalFragPresenter.requestShowingMovies("北京");
-                        break;
-                    case "coming_soon": //即将上映
-                        break;
-                    case "top250": //Top250
-                        break;
-                    case "us_box": //口碑榜
-                        break;
-                    case "weekly": //北美票房榜
-                        break;
-                    case "new_movies": //新片榜
-                        break;
-                }
+                generalFragPresenter.requestShowingMovies(param, "北京");
                 break;
             case "影评":
                 break;

@@ -4,6 +4,7 @@ import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 /**
@@ -14,6 +15,6 @@ import retrofit2.http.Query;
 
 public interface MovieService {
     //正在上映
-    @GET("in_theaters")
-    Observable<ShowingMovies> getShowingMovies(@Query("city") String city);
+    @GET("v2/movie/{param1}")
+    Observable<ShowingMovies> getMoviesNewsByParam(@Path("param1") String param1, @Query("city") String city);
 }

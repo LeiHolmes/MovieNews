@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitUtil {
-    private static final String BASE_URL = "https://api.douban.com/v2/movie/";
+    private static final String BASE_URL = "https://api.douban.com/";
     private static final int DEFAULT_TIMEOUT = 5;
 
     private RetrofitUtil() {

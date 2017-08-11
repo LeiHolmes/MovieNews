@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.holmeslei.movienews.ui.fragment.GeneralMovieFragment;
 
 /**
- * Description:
+ * Description:   首页ViewPager适配器
  * author         xulei
  * Date           2017/8/11
  */

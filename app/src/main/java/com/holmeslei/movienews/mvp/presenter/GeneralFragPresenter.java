@@ -26,8 +26,8 @@ public class GeneralFragPresenter extends BasePresenter<GeneralFragView> {
     /**
      * v,m交互，请求获取正在上映电影
      */
-    public void requestShowingMovies(String city) {
-        addDisposable(generalFragModel.requestShowingMovies(city, new GetShowingMoviesListener() {
+    public void requestShowingMovies(String movieParam, String city) {
+        addDisposable(generalFragModel.requestShowingMovies(movieParam, city, new GetShowingMoviesListener() {
             @Override
             public void onSuccess(ShowingMovies showingMovies) {
                 view.getShowingMoviesData(showingMovies);

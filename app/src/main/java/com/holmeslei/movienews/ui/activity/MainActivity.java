@@ -43,6 +43,7 @@ public class MainActivity extends BaseActivity implements MainView {
     private ActionBarDrawerToggle toggle;
     private MainPresenter mainPresenter;
     private ShowingMoviesAdapter adapter;
+    private MenuItem firstMenuItem; //侧滑菜单第一个MenuItem
 
     @Override
     protected int getLayoutId() {
@@ -63,6 +64,9 @@ public class MainActivity extends BaseActivity implements MainView {
         initData();
     }
 
+    /**
+     * 初始化ToolBar
+     */
     private void initToolBar() {
         tbBase.setTitle("影讯");
         tbBase.setTitleTextColor(Color.parseColor("#ffffff"));
@@ -84,17 +88,24 @@ public class MainActivity extends BaseActivity implements MainView {
         dlMain.setDrawerListener(toggle);
     }
 
+    /**
+     * 初始化侧滑菜单NavigationView
+     */
     private void initNavigationView() {
         navMain.setItemIconTintList(null); //设置图标为彩色，否则都为灰色
+        firstMenuItem = navMain.getMenu().findItem(R.id.menu_nav_news);
         navMain.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                item.setChecked(true);
-                dlMain.closeDrawer(GravityCompat.START);
-                tbBase.setTitle(item.getTitle().toString());
+                item.setChecked(true); //设置选中
+                dlMain.closeDrawer(GravityCompat.START); //关侧滑
+                tbBase.setTitle(item.getTitle().toString()); //设置ToolBar标题
+                //解决点击其他Menu后，第一个Menu选中状态不消失问题
+                if (item.getItemId() != firstMenuItem.getItemId()) {
+                    firstMenuItem.setChecked(false);
+                }
                 switch (item.getItemId()) {
                     case R.id.menu_nav_news:
-                        tbBase.setTitle(item.getTitle().toString());
                         break;
                     case R.id.menu_nav_comments:
                         break;
@@ -112,11 +123,9 @@ public class MainActivity extends BaseActivity implements MainView {
         });
     }
 
-    private void initData() {
-        //请求北京正在热映电影的数据
-        mainPresenter.requestShowingMovies("北京");
-    }
-
+    /**
+     * 初始化RecyclerView
+     */
     private void initRecyclerView() {
         adapter = new ShowingMoviesAdapter(this);
         rvMain.setAdapter(adapter);
@@ -127,6 +136,11 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void showToast(String toastString) {
         Toast.makeText(this, toastString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void initData() {
+        //请求北京正在热映电影的数据
+        mainPresenter.requestShowingMovies("北京");
     }
 
     /**

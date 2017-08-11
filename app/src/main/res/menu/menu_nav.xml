@@ -1,44 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="功能" />
-    <group
-        android:id="@+id/menu_first_group"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/menu_nav_news"
-            android:checkable="true"
-            android:checked="true"
-            android:icon="@mipmap/ic_launcher"
-            android:title="影讯" />
-        <item
-            android:id="@+id/menu_nav_comments"
-            android:checkable="true"
-            android:icon="@mipmap/ic_launcher"
-            android:title="影评" />
-        <item
-            android:id="@+id/menu_nav_actors"
-            android:checkable="true"
-            android:icon="@mipmap/ic_launcher"
-            android:title="演员" />
-        <item
-            android:id="@+id/menu_nav_search"
-            android:checkable="true"
-            android:icon="@mipmap/ic_launcher"
-            android:title="电影搜索" />
-    </group>
-    <item android:title="选项" />
-    <group
-        android:id="@+id/menu_second_group"
-        android:checkableBehavior="single">
-        <item
-            android:id="@+id/menu_nav_setting"
-            android:checkable="true"
-            android:icon="@mipmap/ic_launcher"
-            android:title="设置" />
-        <item
-            android:id="@+id/menu_nav_about"
-            android:checkable="true"
-            android:icon="@mipmap/ic_launcher"
-            android:title="关于" />
-    </group>
+    <item android:title="功能">
+        <menu android:checkableBehavior="single">
+            <item
+                android:id="@+id/menu_nav_news"
+                android:checkable="true"
+                android:checked="true"
+                android:icon="@mipmap/ic_launcher"
+                android:title="影讯" />
+            <item
+                android:id="@+id/menu_nav_comments"
+                android:checkable="true"
+                android:icon="@mipmap/ic_launcher"
+                android:title="影评" />
+            <item
+                android:id="@+id/menu_nav_actors"
+                android:checkable="true"
+                android:icon="@mipmap/ic_launcher"
+                android:title="演员" />
+            <item
+                android:id="@+id/menu_nav_search"
+                android:checkable="true"
+                android:icon="@mipmap/ic_launcher"
+                android:title="电影搜索" />
+        </menu>
+    </item>
+    <item android:title="其他">
+        <menu>
+            <item
+                android:id="@+id/menu_nav_setting"
+                android:checkable="true"
+                android:icon="@mipmap/ic_launcher"
+                android:title="设置" />
+            <item
+                android:id="@+id/menu_nav_about"
+                android:checkable="true"
+                android:icon="@mipmap/ic_launcher"
+                android:title="关于" />
+        </menu>
+    </item>
 </menu>

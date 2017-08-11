@@ -4,12 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_general_movie"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="fragment_general_movie" />
-    <!--<android.support.v7.widget.RecyclerView-->
-    <!--android:id="@+id/rv_Main"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->
+        android:layout_height="match_parent" />
 </LinearLayout>

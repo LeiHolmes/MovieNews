@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import com.holmeslei.movienews.mvp.presenter.BasePresenter;
 import com.holmeslei.movienews.mvp.view.BaseView;
 
+import butterknife.ButterKnife;
+
 /**
  * Description:
  * author         xulei

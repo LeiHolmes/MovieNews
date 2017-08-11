@@ -9,7 +9,7 @@ import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
  */
 
 public interface MainView extends BaseView {
-    void getShowingMoviesData(ShowingMovies showingMovies);
-
-    void getShowingMoviesError(String errorMessage);
+//    void getShowingMoviesData(ShowingMovies showingMovies);
+//
+//    void getShowingMoviesError(String errorMessage);
 }

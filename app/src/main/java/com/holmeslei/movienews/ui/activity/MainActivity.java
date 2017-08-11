@@ -29,6 +29,7 @@ import com.holmeslei.movienews.ui.base.BaseActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.internal.schedulers.NewThreadWorker;
 
 /**
  * Description:   入口Activity
@@ -36,8 +37,6 @@ import butterknife.ButterKnife;
  * Date           2017/8/7 16:20
  */
 public class MainActivity extends BaseActivity implements MainView {
-    //    @BindView(R.id.rv_Main)
-//    RecyclerView rvMain;
     @BindView(R.id.dl_main)
     DrawerLayout dlMain;
     @BindView(R.id.tb_base)
@@ -50,10 +49,11 @@ public class MainActivity extends BaseActivity implements MainView {
     NavigationView navMain;
     private ActionBarDrawerToggle toggle;
     private MainPresenter mainPresenter;
-    //    private ShowingMoviesAdapter adapter;
     private MenuItem firstMenuItem; //侧滑菜单第一个MenuItem
     private MainViewPagerAdapter adapter;
-    private String[] titles = new String[]{"正在热映", "即将上映", "Top250", "口碑榜", "北美新票房榜", "新片榜"};
+    private String function = "影讯"; //默认影讯数据
+    private String[] params = new String[]{"in_theaters", "coming_soon", "top250", "us_box", "weekly", "new_movies"};
+    private String[] titles = new String[]{"正在热映", "即将上映", "Top250", "口碑榜", "北美票房榜", "新片榜"};
 
     @Override
     protected int getLayoutId() {
@@ -71,7 +71,6 @@ public class MainActivity extends BaseActivity implements MainView {
         initToolBar();
         initTabAndViewPager();
         initNavigationView();
-//        initRecyclerView();
         initData();
     }
 
@@ -100,7 +99,7 @@ public class MainActivity extends BaseActivity implements MainView {
     }
 
     private void initTabAndViewPager() {
-        adapter = new MainViewPagerAdapter(getSupportFragmentManager(), this, titles);
+        adapter = new MainViewPagerAdapter(getSupportFragmentManager(), function, params, titles);
         vpMain.setAdapter(adapter);
         tlBase.setupWithViewPager(vpMain);
     }
@@ -123,6 +122,9 @@ public class MainActivity extends BaseActivity implements MainView {
                 }
                 switch (item.getItemId()) {
                     case R.id.menu_nav_news:
+//                        function = item.getTitle().toString(); //更新当前功能
+//                        titles = new String[]{}; //更新当前功能下Tab标签
+//                        params = new String[]{}; //更新当前功能下Tab标签对应参数
                         break;
                     case R.id.menu_nav_comments:
                         break;
@@ -140,40 +142,11 @@ public class MainActivity extends BaseActivity implements MainView {
         });
     }
 
-//    /**
-//     * 初始化RecyclerView
-//     */
-//    private void initRecyclerView() {
-//        adapter = new ShowingMoviesAdapter(this);
-//        rvMain.setAdapter(adapter);
-//        rvMain.setHasFixedSize(true);
-//        rvMain.setLayoutManager(new LinearLayoutManager(this));
-//    }
-
     @Override
     public void showToast(String toastString) {
         Toast.makeText(this, toastString, Toast.LENGTH_SHORT).show();
     }
 
     private void initData() {
-        //请求北京正在热映电影的数据
-        mainPresenter.requestShowingMovies("北京");
-    }
-
-    /**
-     * 获取正在上映电影数据
-     */
-    @Override
-    public void getShowingMoviesData(ShowingMovies showingMovies) {
-        Log.i("getShowingMoviesData", showingMovies.toString());
-//        adapter.setData(showingMovies.getSubjects());
-    }
-
-    /**
-     * 获取正在上映电影数据失败
-     */
-    @Override
-    public void getShowingMoviesError(String errorMessage) {
-        Log.i("getShowingMoviesError", errorMessage);
     }
 }

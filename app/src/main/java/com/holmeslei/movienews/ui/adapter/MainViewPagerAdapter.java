@@ -14,25 +14,30 @@ import com.holmeslei.movienews.ui.fragment.GeneralMovieFragment;
  */
 
 public class MainViewPagerAdapter extends FragmentPagerAdapter {
-    private Context context;
+    private String function;
+    private String[] params;
     private String[] titles;
 
-    public MainViewPagerAdapter(FragmentManager fm, Context context,String[] titles) {
+    public MainViewPagerAdapter(FragmentManager fm, String function, String[] params, String[] titles) {
         super(fm);
-        this.context = context;
+        this.function = function;
+        this.params = params;
         this.titles = titles;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return GeneralMovieFragment.newInstance(position + 1);
+        return GeneralMovieFragment.newInstance(function, params[position]);
     }
 
     @Override
     public int getCount() {
-        return titles.length;
+        return params.length;
     }
 
+    /**
+     * 设置TabLayout标题
+     */
     @Override
     public CharSequence getPageTitle(int position) {
         return titles[position];

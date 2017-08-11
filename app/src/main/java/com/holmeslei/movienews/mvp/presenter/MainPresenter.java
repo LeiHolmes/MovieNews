@@ -23,20 +23,20 @@ public class MainPresenter extends BasePresenter<MainView> {
     public void onCreate() {
     }
 
-    /**
-     * v,m交互，请求获取正在上映电影
-     */
-    public void requestShowingMovies(String city) {
-        addDisposable(mainModel.requestShowingMovies(city, new GetShowingMoviesListener() {
-            @Override
-            public void onSuccess(ShowingMovies showingMovies) {
-                view.getShowingMoviesData(showingMovies);
-            }
-
-            @Override
-            public void onError(String errorMessage) {
-                view.getShowingMoviesError(errorMessage);
-            }
-        }));
-    }
+//    /**
+//     * v,m交互，请求获取正在上映电影
+//     */
+//    public void requestShowingMovies(String city) {
+//        addDisposable(mainModel.requestShowingMovies(city, new GetShowingMoviesListener() {
+//            @Override
+//            public void onSuccess(ShowingMovies showingMovies) {
+//                view.getShowingMoviesData(showingMovies);
+//            }
+//
+//            @Override
+//            public void onError(String errorMessage) {
+//                view.getShowingMoviesError(errorMessage);
+//            }
+//        }));
+//    }
 }

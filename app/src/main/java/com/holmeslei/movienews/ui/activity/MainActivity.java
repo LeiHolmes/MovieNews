@@ -4,7 +4,9 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.holmeslei.movienews.R;
@@ -20,6 +23,7 @@ import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
 import com.holmeslei.movienews.mvp.presenter.BasePresenter;
 import com.holmeslei.movienews.mvp.presenter.MainPresenter;
 import com.holmeslei.movienews.mvp.view.MainView;
+import com.holmeslei.movienews.ui.adapter.MainViewPagerAdapter;
 import com.holmeslei.movienews.ui.adapter.ShowingMoviesAdapter;
 import com.holmeslei.movienews.ui.base.BaseActivity;
 
@@ -32,18 +36,24 @@ import butterknife.ButterKnife;
  * Date           2017/8/7 16:20
  */
 public class MainActivity extends BaseActivity implements MainView {
-    @BindView(R.id.rv_Main)
-    RecyclerView rvMain;
-    @BindView(R.id.tb_base)
-    Toolbar tbBase;
-    @BindView(R.id.nav_main)
-    NavigationView navMain;
+    //    @BindView(R.id.rv_Main)
+//    RecyclerView rvMain;
     @BindView(R.id.dl_main)
     DrawerLayout dlMain;
+    @BindView(R.id.tb_base)
+    Toolbar tbBase;
+    @BindView(R.id.tl_base)
+    TabLayout tlBase;
+    @BindView(R.id.vp_main)
+    ViewPager vpMain;
+    @BindView(R.id.nav_main)
+    NavigationView navMain;
     private ActionBarDrawerToggle toggle;
     private MainPresenter mainPresenter;
-    private ShowingMoviesAdapter adapter;
+    //    private ShowingMoviesAdapter adapter;
     private MenuItem firstMenuItem; //侧滑菜单第一个MenuItem
+    private MainViewPagerAdapter adapter;
+    private String[] titles = new String[]{"正在热映", "即将上映", "Top250", "口碑榜", "北美新票房榜", "新片榜"};
 
     @Override
     protected int getLayoutId() {
@@ -59,8 +69,9 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     protected void onCreateActivity(Bundle savedInstanceState) {
         initToolBar();
+        initTabAndViewPager();
         initNavigationView();
-        initRecyclerView();
+//        initRecyclerView();
         initData();
     }
 
@@ -86,6 +97,12 @@ public class MainActivity extends BaseActivity implements MainView {
         };
         toggle.syncState();
         dlMain.setDrawerListener(toggle);
+    }
+
+    private void initTabAndViewPager() {
+        adapter = new MainViewPagerAdapter(getSupportFragmentManager(), this, titles);
+        vpMain.setAdapter(adapter);
+        tlBase.setupWithViewPager(vpMain);
     }
 
     /**
@@ -123,15 +140,15 @@ public class MainActivity extends BaseActivity implements MainView {
         });
     }
 
-    /**
-     * 初始化RecyclerView
-     */
-    private void initRecyclerView() {
-        adapter = new ShowingMoviesAdapter(this);
-        rvMain.setAdapter(adapter);
-        rvMain.setHasFixedSize(true);
-        rvMain.setLayoutManager(new LinearLayoutManager(this));
-    }
+//    /**
+//     * 初始化RecyclerView
+//     */
+//    private void initRecyclerView() {
+//        adapter = new ShowingMoviesAdapter(this);
+//        rvMain.setAdapter(adapter);
+//        rvMain.setHasFixedSize(true);
+//        rvMain.setLayoutManager(new LinearLayoutManager(this));
+//    }
 
     @Override
     public void showToast(String toastString) {
@@ -149,7 +166,7 @@ public class MainActivity extends BaseActivity implements MainView {
     @Override
     public void getShowingMoviesData(ShowingMovies showingMovies) {
         Log.i("getShowingMoviesData", showingMovies.toString());
-        adapter.setData(showingMovies.getSubjects());
+//        adapter.setData(showingMovies.getSubjects());
     }
 
     /**

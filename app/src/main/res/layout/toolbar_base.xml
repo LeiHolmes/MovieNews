@@ -16,4 +16,13 @@
         app:layout_scrollFlags="scroll|enterAlways|snap"
         app:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
-</android.support.design.widget.AppBarLayout> 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_base"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorHeight="2dp"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/grayd" />
+</android.support.design.widget.AppBarLayout>

@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="drawer_item_bg_p">#e8e8e8</color>
     <color name="drawer_item_bg_n">#fffff9</color>
+    <color name="white">#ffffff</color>
+    <color name="grayd">#dddddddd</color>
 </resources>

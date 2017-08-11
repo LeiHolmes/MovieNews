@@ -20,15 +20,6 @@ import com.holmeslei.movienews.mvp.view.BaseView;
 public abstract class BaseFragment<T extends BasePresenter> extends Fragment implements BaseView {
     protected T presenter;
     protected Context context;
-    protected Bundle bundle;
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (bundle != null) {
-            outState.putBundle("bundle", bundle);
-        }
-    }
 
     /**
      * 绑定Activity
@@ -53,9 +44,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (savedInstanceState != null)
-            bundle = savedInstanceState.getBundle("bundle");
-        else bundle = getArguments() == null ? new Bundle() : getArguments();
         //创建Presenter
         presenter = initPresenter();
     }
@@ -109,10 +97,6 @@ public abstract class BaseFragment<T extends BasePresenter> extends Fragment imp
     @Override
     public Context getContext() {
         return context;
-    }
-
-    public Bundle getBundle() {
-        return bundle;
     }
 
     public BaseFragment getFragment() {

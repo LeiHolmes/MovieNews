@@ -27,10 +27,11 @@ import butterknife.ButterKnife;
 
 public class ShowingMoviesAdapter extends RecyclerView.Adapter<ShowingMoviesAdapter.MyViewHolder> {
     private Context context;
-    private List<ShowingMovies.SubjectsEntity> data = new ArrayList<>();
+    private List<ShowingMovies.SubjectsEntity> data;
 
-    public ShowingMoviesAdapter(Context context) {
+    public ShowingMoviesAdapter(Context context, List<ShowingMovies.SubjectsEntity> data) {
         this.context = context;
+        this.data = data;
     }
 
     public void setData(List<ShowingMovies.SubjectsEntity> data) {

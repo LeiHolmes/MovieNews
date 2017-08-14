@@ -1,5 +1,7 @@
 package com.holmeslei.movienews.mvp.presenter;
 
+import android.util.Log;
+
 import com.holmeslei.movienews.mvp.model.GeneralFragModel;
 import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
 import com.holmeslei.movienews.mvp.model.listener.GetShowingMoviesListener;
@@ -26,16 +28,16 @@ public class GeneralFragPresenter extends BasePresenter<GeneralFragView> {
     /**
      * v,m交互，请求获取正在上映、即将上映、Top250电影
      */
-    public void requestShowingMovies(String movieParam, String city) {
-        addDisposable(generalFragModel.requestShowingMovies(movieParam, city, new GetShowingMoviesListener() {
+    public void requestShowingMovies(String movieParam, String city, int start, int count, final int type) {
+        addDisposable(generalFragModel.requestShowingMovies(movieParam, city, start, count, new GetShowingMoviesListener() {
             @Override
             public void onSuccess(ShowingMovies showingMovies) {
-                view.getShowingMoviesData(showingMovies);
+                view.getShowingMoviesData(showingMovies, type);
             }
 
             @Override
             public void onError(String errorMessage) {
-                view.getShowingMoviesError(errorMessage);
+                view.getShowingMoviesError(errorMessage, type);
             }
         }));
     }

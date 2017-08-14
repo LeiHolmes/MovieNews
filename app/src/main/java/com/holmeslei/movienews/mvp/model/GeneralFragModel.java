@@ -1,5 +1,7 @@
 package com.holmeslei.movienews.mvp.model;
 
+import android.util.Log;
+
 import com.holmeslei.movienews.http.MovieServiceImpl;
 import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
 import com.holmeslei.movienews.mvp.model.listener.GetShowingMoviesListener;
@@ -19,8 +21,8 @@ public class GeneralFragModel {
     /**
      * 请求获取正在上映、即将上映、TOP250电影
      */
-    public Disposable requestShowingMovies(String movieParam, String city, final GetShowingMoviesListener getShowingMoviesListener) {
-        return MovieServiceImpl.getInstance().getMoviesNewsByParam(movieParam, city)
+    public Disposable requestShowingMovies(String movieParam, String city, int start, int count, final GetShowingMoviesListener getShowingMoviesListener) {
+        return MovieServiceImpl.getInstance().getMoviesNewsByParam(movieParam, city, start, count)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<ShowingMovies>() {

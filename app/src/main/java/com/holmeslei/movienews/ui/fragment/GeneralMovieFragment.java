@@ -8,10 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.Toast;
 
 import com.holmeslei.movienews.R;
+import com.holmeslei.movienews.constant.SwipeRequestType;
 import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
 import com.holmeslei.movienews.mvp.presenter.GeneralFragPresenter;
 import com.holmeslei.movienews.mvp.view.GeneralFragView;
@@ -19,6 +19,9 @@ import com.holmeslei.movienews.ui.adapter.ShowingMoviesAdapter;
 import com.holmeslei.movienews.ui.base.BaseFragment;
 import com.holmeslei.movienews.ui.widget.swipe.SwipeRefreshLayout;
 import com.holmeslei.movienews.ui.widget.swipe.SwipeRefreshLayoutDirection;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,15 +35,18 @@ import butterknife.ButterKnife;
 public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> implements GeneralFragView {
     public static final String FUNCTION = "function";
     public static final String PARAM = "param";
+    private String function; //功能
+    private String param; //请求参数
+    private int start = 0;
+    private int startCache = 0; //缓存页数，防止请求错误
+    private int count = 20;
     @BindView(R.id.rv_general_movie)
     RecyclerView rvGeneralMovie;
     @BindView(R.id.srl_general_movie)
     SwipeRefreshLayout srlGeneralMovie;
-    private View view;
-    private String function; //功能
-    private String param; //参数
     private GeneralFragPresenter generalFragPresenter;
     private ShowingMoviesAdapter adapter;
+    private List<ShowingMovies.SubjectsEntity> data;
 
     public static GeneralMovieFragment newInstance(String function, String param) {
         Bundle bundle = new Bundle();
@@ -58,7 +64,7 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
 
     @Override
     public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_general_movie, container, false);
+        View view = inflater.inflate(R.layout.fragment_general_movie, container, false);
         ButterKnife.bind(this, view);
         initData();
         initRecyclerView();
@@ -68,16 +74,17 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
     private void initData() {
         function = getArguments().getString(FUNCTION);
         param = getArguments().getString(PARAM);
-        requestData();
+        data = new ArrayList<>();
+        requestData(SwipeRequestType.TYPE_DOWN, start, count);
     }
 
     /**
      * 请求网络数据
      */
-    private void requestData() {
+    private void requestData(int type, int start, int count) {
         switch (function) {
             case "影讯":
-                generalFragPresenter.requestShowingMovies(param, "北京");
+                generalFragPresenter.requestShowingMovies(param, "北京", start, count, type);
                 break;
             case "影评":
                 break;
@@ -93,7 +100,7 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
      */
     private void initRecyclerView() {
         //RecyclerView配置
-        adapter = new ShowingMoviesAdapter(getActivity());
+        adapter = new ShowingMoviesAdapter(getActivity(), data);
         rvGeneralMovie.setAdapter(adapter);
         rvGeneralMovie.setHasFixedSize(true);
         rvGeneralMovie.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -113,9 +120,13 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
                 setSwipeRefreshLoadingState();
                 switch (direction) {
                     case TOP:
-                        requestData();
+                        start = 0;
+                        requestData(SwipeRequestType.TYPE_DOWN, start, count);
                         break;
                     case BOTTOM:
+                        startCache = start;
+                        start = start + count;
+                        requestData(SwipeRequestType.TYPE_UP, start, count);
                         break;
                 }
             }
@@ -153,9 +164,18 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
      * 获得电影数据
      */
     @Override
-    public void getShowingMoviesData(ShowingMovies showingMovies) {
+    public void getShowingMoviesData(ShowingMovies showingMovies, int type) {
         Log.i("getShowingMoviesData", showingMovies.toString());
-        adapter.setData(showingMovies.getSubjects());
+        if (type == SwipeRequestType.TYPE_DOWN) { //下拉
+            data.clear();
+            data = showingMovies.getSubjects();
+        } else if (type == SwipeRequestType.TYPE_UP) { //上拉
+            data.addAll(showingMovies.getSubjects());
+            if (showingMovies.getSubjects().size() == 0) {
+                showToast("没有更多了");
+            }
+        }
+        adapter.setData(data);
         setSwipeRefreshLoadedState();
     }
 
@@ -163,8 +183,11 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
      * 获得电影数据请求错误日志
      */
     @Override
-    public void getShowingMoviesError(String errorMessage) {
+    public void getShowingMoviesError(String errorMessage, int type) {
         Log.i("getShowingMoviesError", errorMessage);
         setSwipeRefreshLoadedState();
+        if (type == SwipeRequestType.TYPE_UP) {
+            start = startCache;
+        }
     }
 }

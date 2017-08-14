@@ -7,4 +7,7 @@
     <color name="drawer_item_bg_n">#fffff9</color>
     <color name="white">#ffffff</color>
     <color name="grayd">#dddddddd</color>
+    <color name="bg_blue">#ff0000ff</color>
+    <color name="orange_light">#ffeec875</color>
+    <color name="red_light">#ffff0000</color>
 </resources>

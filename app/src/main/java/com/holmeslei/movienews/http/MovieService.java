@@ -14,7 +14,7 @@ import retrofit2.http.Query;
  */
 
 public interface MovieService {
-    //正在上映
+    //正在上映、即将上映、Top250
     @GET("v2/movie/{param1}")
     Observable<ShowingMovies> getMoviesNewsByParam(@Path("param1") String param1, @Query("city") String city);
 }

@@ -17,7 +17,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class GeneralFragModel {
     /**
-     * 请求获取正在上映电影
+     * 请求获取正在上映、即将上映、TOP250电影
      */
     public Disposable requestShowingMovies(String movieParam, String city, final GetShowingMoviesListener getShowingMoviesListener) {
         return MovieServiceImpl.getInstance().getMoviesNewsByParam(movieParam, city)

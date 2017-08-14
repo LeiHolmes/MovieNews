@@ -8,7 +8,7 @@ import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
  * Date           2017/8/11
  */
 
-public interface GeneralFragView extends BaseView{
+public interface GeneralFragView extends BaseView {
     void getShowingMoviesData(ShowingMovies showingMovies);
 
     void getShowingMoviesError(String errorMessage);

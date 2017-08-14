@@ -52,8 +52,8 @@ public class MainActivity extends BaseActivity implements MainView {
     private MenuItem firstMenuItem; //侧滑菜单第一个MenuItem
     private MainViewPagerAdapter adapter;
     private String function = "影讯"; //默认影讯数据
-    private String[] params = new String[]{"in_theaters", "coming_soon", "top250"};//, "us_box"
-    private String[] titles = new String[]{"正在热映", "即将上映", "Top250"};//, "北美票房榜"
+    private String[] params = new String[]{"in_theaters", "coming_soon", "top250"};
+    private String[] titles = new String[]{"正在热映", "即将上映", "Top250"};
 
     @Override
     protected int getLayoutId() {

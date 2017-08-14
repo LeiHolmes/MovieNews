@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Description:   首页正在热映电影列表适配器
+ * Description:   首页正在热映、即将上映、TOP250电影列表适配器
  * author         xulei
  * Date           2017/8/8
  */

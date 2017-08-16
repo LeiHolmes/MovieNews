@@ -27,7 +27,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Description:   通用的电影信息列表Fragment
+ * Description:   通用的电影信息ViewPager的Fragment
  * author         xulei
  * Date           2017/8/11
  */

@@ -10,7 +10,7 @@ import com.holmeslei.movienews.R;
 import com.holmeslei.movienews.base.BaseFragment;
 import com.holmeslei.movienews.constant.SwipeRequestType;
 import com.holmeslei.movienews.mvp.contract.GeneralFragContract;
-import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
+import com.holmeslei.movienews.entity.bean.ShowingMovies;
 import com.holmeslei.movienews.mvp.presenter.GeneralFragPresenter;
 import com.holmeslei.movienews.ui.adapter.ShowingMoviesAdapter;
 import com.holmeslei.movienews.ui.widget.swipe.SwipeRefreshLayout;

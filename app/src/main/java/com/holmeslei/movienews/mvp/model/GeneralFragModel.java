@@ -1,10 +1,8 @@
 package com.holmeslei.movienews.mvp.model;
 
-import android.util.Log;
-
-import com.holmeslei.movienews.http.MovieServiceImpl;
-import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
-import com.holmeslei.movienews.mvp.model.listener.GetShowingMoviesListener;
+import com.holmeslei.movienews.entity.http.MovieServiceImpl;
+import com.holmeslei.movienews.entity.bean.ShowingMovies;
+import com.holmeslei.movienews.entity.listener.GetShowingMoviesListener;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;

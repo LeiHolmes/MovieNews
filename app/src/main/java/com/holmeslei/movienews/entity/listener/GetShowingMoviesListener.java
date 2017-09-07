@@ -1,6 +1,6 @@
-package com.holmeslei.movienews.mvp.model.listener;
+package com.holmeslei.movienews.entity.listener;
 
-import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
+import com.holmeslei.movienews.entity.bean.ShowingMovies;
 
 /**
  * Description:   获取正在上映电影请求结果状态回调

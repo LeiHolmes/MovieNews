@@ -1,4 +1,4 @@
-package com.holmeslei.movienews.http;
+package com.holmeslei.movienews.entity.http;
 
 import com.holmeslei.movienews.util.RetrofitUtil;
 

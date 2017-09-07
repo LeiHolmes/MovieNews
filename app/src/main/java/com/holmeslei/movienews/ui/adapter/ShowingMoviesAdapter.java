@@ -11,9 +11,8 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.holmeslei.movienews.R;
-import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
+import com.holmeslei.movienews.entity.bean.ShowingMovies;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

@@ -2,7 +2,7 @@ package com.holmeslei.movienews.mvp.contract;
 
 import com.holmeslei.movienews.base.BaseSimplePresenter;
 import com.holmeslei.movienews.base.BaseView;
-import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
+import com.holmeslei.movienews.entity.bean.ShowingMovies;
 
 /**
  * Description:   通用Fragment的Contract

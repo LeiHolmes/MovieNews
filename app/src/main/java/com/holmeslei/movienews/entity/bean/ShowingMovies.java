@@ -1,4 +1,4 @@
-package com.holmeslei.movienews.mvp.model.entity;
+package com.holmeslei.movienews.entity.bean;
 
 import java.util.List;
 

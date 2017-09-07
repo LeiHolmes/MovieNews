@@ -1,6 +1,6 @@
-package com.holmeslei.movienews.http;
+package com.holmeslei.movienews.entity.http;
 
-import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
+import com.holmeslei.movienews.entity.bean.ShowingMovies;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

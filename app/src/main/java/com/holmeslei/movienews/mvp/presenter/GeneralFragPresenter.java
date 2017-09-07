@@ -3,8 +3,8 @@ package com.holmeslei.movienews.mvp.presenter;
 import com.holmeslei.movienews.base.BasePresenter;
 import com.holmeslei.movienews.mvp.contract.GeneralFragContract;
 import com.holmeslei.movienews.mvp.model.GeneralFragModel;
-import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
-import com.holmeslei.movienews.mvp.model.listener.GetShowingMoviesListener;
+import com.holmeslei.movienews.entity.bean.ShowingMovies;
+import com.holmeslei.movienews.entity.listener.GetShowingMoviesListener;
 
 /**
  * Description:   通用Fragment的Presenter

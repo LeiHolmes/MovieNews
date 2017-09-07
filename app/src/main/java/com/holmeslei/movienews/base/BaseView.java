@@ -1,4 +1,4 @@
-package com.holmeslei.movienews.mvp.view;
+package com.holmeslei.movienews.base;
 
 /**
  * Description:   MVP中的基本view接口类

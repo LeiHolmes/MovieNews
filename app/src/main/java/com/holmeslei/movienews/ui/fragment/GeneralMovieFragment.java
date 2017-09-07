@@ -1,22 +1,18 @@
 package com.holmeslei.movienews.ui.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.holmeslei.movienews.R;
+import com.holmeslei.movienews.base.BaseFragment;
 import com.holmeslei.movienews.constant.SwipeRequestType;
+import com.holmeslei.movienews.mvp.contract.GeneralFragContract;
 import com.holmeslei.movienews.mvp.model.entity.ShowingMovies;
 import com.holmeslei.movienews.mvp.presenter.GeneralFragPresenter;
-import com.holmeslei.movienews.mvp.view.GeneralFragView;
 import com.holmeslei.movienews.ui.adapter.ShowingMoviesAdapter;
-import com.holmeslei.movienews.ui.base.BaseFragment;
 import com.holmeslei.movienews.ui.widget.swipe.SwipeRefreshLayout;
 import com.holmeslei.movienews.ui.widget.swipe.SwipeRefreshLayoutDirection;
 
@@ -24,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Description:   通用的电影信息ViewPager的Fragment
@@ -32,7 +27,7 @@ import butterknife.ButterKnife;
  * Date           2017/8/11
  */
 
-public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> implements GeneralFragView {
+public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> implements GeneralFragContract.View {
     public static final String FUNCTION = "function";
     public static final String PARAM = "param";
     private String function; //功能
@@ -58,41 +53,28 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
     }
 
     @Override
-    public void showToast(String toastMessage) {
-        Toast.makeText(context, toastMessage, Toast.LENGTH_SHORT).show();
+    protected int getLayoutId() {
+        return R.layout.fragment_general_movie;
     }
 
     @Override
-    public View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_general_movie, container, false);
-        ButterKnife.bind(this, view);
-        initData();
-        initRecyclerView();
-        return view;
+    protected GeneralFragPresenter initPresenter() {
+        generalFragPresenter = new GeneralFragPresenter();
+        return generalFragPresenter;
     }
 
-    private void initData() {
+    @Override
+    protected void initStateAndData() {
         function = getArguments().getString(FUNCTION);
         param = getArguments().getString(PARAM);
         data = new ArrayList<>();
         requestData(SwipeRequestType.TYPE_DOWN, start, count);
+        initRecyclerView();
     }
 
-    /**
-     * 请求网络数据
-     */
-    private void requestData(int type, int start, int count) {
-        switch (function) {
-            case "影讯":
-                generalFragPresenter.requestShowingMovies(param, "北京", start, count, type);
-                break;
-            case "影评":
-                break;
-            case "演员":
-                break;
-            case "电影搜索":
-                break;
-        }
+    @Override
+    protected void initListener() {
+
     }
 
     /**
@@ -134,6 +116,23 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
     }
 
     /**
+     * 请求网络数据
+     */
+    private void requestData(int type, int start, int count) {
+        switch (function) {
+            case "影讯":
+                generalFragPresenter.requestShowingMovies(param, "北京", start, count, type);
+                break;
+            case "影评":
+                break;
+            case "演员":
+                break;
+            case "电影搜索":
+                break;
+        }
+    }
+
+    /**
      * 设置顶部正在加载的状态
      */
     private void setSwipeRefreshLoadingState() {
@@ -152,12 +151,6 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
             srlGeneralMovie.setRefreshing(false);
             srlGeneralMovie.setEnabled(true);
         }
-    }
-
-    @Override
-    protected GeneralFragPresenter initPresenter() {
-        generalFragPresenter = new GeneralFragPresenter(this);
-        return generalFragPresenter;
     }
 
     /**
@@ -190,4 +183,9 @@ public class GeneralMovieFragment extends BaseFragment<GeneralFragPresenter> imp
             start = startCache;
         }
     }
+
+    public void showToast(String toastMessage) {
+        Toast.makeText(mContext, toastMessage, Toast.LENGTH_SHORT).show();
+    }
+
 }

@@ -1,15 +1,18 @@
 apply plugin: 'com.android.application'
 
+def config = rootProject.ext.android
+def libraries = rootProject.ext.dependencies
+
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
     defaultConfig {
         applicationId "com.holmeslei.movienews"
-        minSdkVersion 19
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        testInstrumentationRunner config.testInstrumentationRunner
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -28,16 +31,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support.constraint:constraint-layout:1.1.0-beta1'
-    compile 'com.jakewharton:butterknife:8.8.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.3'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    compile 'com.github.bumptech.glide:glide:4.0.0'
-    testCompile 'junit:junit:4.12'
-    implementation 'com.android.support:design:26.0.0-beta1'
-    implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
-    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile libraries.glide
+    compile libraries.rxjava
+    compile libraries.rxandroid
+    compile libraries.retrofit
+    compile libraries.butterknife
+    compile libraries.converter_gson
+    compile libraries.adapter_rxjava2
+    testCompile libraries.junit
+    implementation libraries.design
+    implementation libraries.appcompat_v7
+    annotationProcessor libraries.butterknife_compiler
 }

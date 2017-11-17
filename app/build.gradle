@@ -31,15 +31,15 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile libraries.glide
-    compile libraries.rxjava
-    compile libraries.rxandroid
-    compile libraries.retrofit
-    compile libraries.butterknife
-    compile libraries.converter_gson
-    compile libraries.adapter_rxjava2
     testCompile libraries.junit
+    implementation libraries.glide
     implementation libraries.design
+    implementation libraries.rxjava
+    implementation libraries.rxandroid
+    implementation libraries.retrofit
+    implementation libraries.butterknife
     implementation libraries.appcompat_v7
+    implementation libraries.converter_gson
+    implementation libraries.adapter_rxjava2
     annotationProcessor libraries.butterknife_compiler
 }
